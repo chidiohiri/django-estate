@@ -4,15 +4,9 @@ Django Estate is a full-featured web application designed to streamline the prop
 
 Whether you're a tenant searching for the perfect space or a landlord looking to manage rental applications efficiently, Django Estate aims to provide a seamless solution for both parties.
 
-## Getting Started
+### Getting Started
 
 These instructions will guide you through setting up Django Estate on your local machine for development and testing purposes. This guide assumes you are working on a Windows environment. Mac and Linux users can adapt the commands accordingly.
-
-## Live Demo on YouTube
-
-A walkthrough video is available on YouTube to demonstrate the key features and user experience of the application.
-
-***Watch the demo here:*** YouTube Demo (Link to be added)
 
 ### Prerequisites
 
@@ -54,22 +48,34 @@ Run server on your terminal (cmd or powershell). Open your browser and navigate 
 
     python manage.py runserver
 
-Once done, refer to the YouTube Demo for the project.
+### Core Features
 
-## Deployment
+ - Property Listings: Browse through an up-to-date catalog of available properties with filtering capabilities by price, location, availability, and more.
+
+- Tenant and Landlord Roles: Users can register as either tenants or landlords, unlocking role-specific functionality.
+
+- Application Management: Streamlined workflow for submitting, reviewing, and managing rental applications.
+
+- Admin Verification: A superuser (admin) account can verify properties, manage user accounts, and moderate content.
+
+- User Authentication: Secure registration and login functionality with session management.
+
+- Responsive Design: Frontend styled with Bootstrap to ensure compatibility across various screen sizes.
+
+### Deployment
 
 For production deployment, you will need to configure your application with a production-grade database (such as PostgreSQL), static file handling, and secure hosting. You may refer to the official [Django Documentation](https://docs.djangoproject.com/en/5.1/howto/deployment/) on deployment
 
-## Authors
+### Authors
 
   - **Chidi Ohiri** - *For updates, networking, or feedback, feel free to connect:* -
     [Linkedin](https://www.linkedin.com/in/chidiebere-ohiri/)
 
-## License
+### License
 
 This project is licensed under the [MIT LICENSE](LICENSE.md), which permits reuse, modification, and distribution with proper attribution.
 
-## Acknowledgments
+### Acknowledgments
 
   - Guido van Rossum, the creator of Python
   - The Django core team and community for building and maintaining such a robust framework
