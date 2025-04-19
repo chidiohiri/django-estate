@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if request.user.is_landlord %}
+
+<div class="row align-items-md-stretch">
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>Add a House</h2>
+            <p>
+                Easily add new properties to your portfolio. Keep your rental listings organized by entering key details
+                like address, number of rooms, rent amount, and availability status.
+            </p>
+            <a href="{% url 'add-house' %}" class="btn btn-outline-light" type="button">Add House</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+            <h2>Manage Houses</h2>
+            <p>
+                Effortlessly manage your properties in one place. Keep your housing information up to date by editing
+                details like address, rent, occupancy status, and maintenance notes. Stay organized and in control of
+                your rental units.
+
+            </p>
+            <a href="{% url 'my-houses' %}" class="btn btn-outline-secondary" type="button">Manage Houses</a>
+        </div>
+    </div>
+</div>
+{% elif request.user.is_tenant %}
+<div class="row align-items-md-stretch">
+    <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>Search for Houses</h2>
+            <p>
+                Quickly find a home that fits your needs. Browse available houses with key details like location, rent,
+                number of rooms, and amenities to help you choose the perfect place to live.
+            </p>
+            <a href="{% url 'all-houses' %}" class="btn btn-outline-light" type="button">Search for Houses</a>
+        </div>
+    </div>
+
+</div>
+{% endif %}
+
+{% endblock content %}

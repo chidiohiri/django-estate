@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center ">
+        <h6 class="mb-0">Add a House</h6>
+        
+    </div>
+    <div class="card-body">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Title</label>
+                                {% render_field form.title class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">House Type</label>
+                                {% render_field form.house_type class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Rent Price <span class="text-muted"><small>NGN</small></span></label>
+                                {% render_field form.rent_price class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Address</label>
+                                {% render_field form.address class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">City</label>
+                                {% render_field form.city class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">State</label>
+                                {% render_field form.state class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Country</label>
+                                {% render_field form.country class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Rent Cycle</label>
+                                {% render_field form.rent_cycle class="form-control" %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Availability</label>
+                                {% render_field form.is_available class="form-control" %}
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Landlord Notes</label>
+                                {% render_field form.landlord_notes class="form-control" id="notes" %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    $('#notes').trumbowyg();
+</script>
+
+{% endblock content %}

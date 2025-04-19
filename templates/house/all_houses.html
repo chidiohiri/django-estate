@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="mb-4">
+    <div class="row align-items-md-stretch">
+        <div class="col-md-8">
+            <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Find Your Dream Home in Minutes!</h2>
+                <p>
+                    Browse thousands of verified property listings to find the one that fits your lifestyle and budget.
+                    Whether you're buying, renting, or investing, every listing is genuine and agents respond promptly.
+                    Make sure you know what you're looking for—and get ready to make your move. Wishing you all the best
+                    in finding your perfect space!
+                </p>
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="h-100 p-5 bg-light border rounded-3">
+                <h2>Create an Account</h2>
+                <p>
+                    If you are new here, you need to create an account to apply for jobs or post a job ad.
+                    Start now!
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center ">
+                <h6 class="mb-0">Filter Houses</h6>
+
+            </div>
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-2">
+                                <label for="exampleInputEmail1" class="form-label">Title</label>
+                                {% render_field filter.form.title class="form-control" %}
+                            </div>
+                            <div class="mb-2">
+                                <label for="exampleInputEmail1" class="form-label">City</label>
+                                {% render_field filter.form.city class="form-control" %}
+                            </div>
+                            <div class="mb-2">
+                                <label for="exampleInputEmail1" class="form-label">State</label>
+                                {% render_field filter.form.state class="form-control" %}
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Rent Cycle</label>
+                                {% render_field filter.form.rent_cycle class="form-control" %}
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center ">
+                <h6 class="mb-0">All Houses</h6>
+            </div>
+            <div class="card-body">
+                {% for house in houses %}
+                {% if house.is_verified %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="">
+                            <h5 class="mb-1 ">{{house.title|title}}</h5>
+                            <p class="card-text">
+                                {{house.address}} {{house.city}}, {{house.state}} State, {{house.country}}.
+                            </p>
+                            <div class="text-muted small d-flex flex-wrap gap-3 align-items-center">
+                                <span><i class="bi bi-briefcase"></i> {{house.rent_price|intcomma}} <small
+                                    class="text-muted">NGN</small></span>
+                                <span><i class="bi bi-geo-alt"></i> Rent {{house.rent_cycle}}</span>
+                                <span><i class="bi bi-clock"></i> {{house.city}}, {{house.state}}</span>
+                                <span><span class="badge bg-success">Verified</span></span>
+                            </div>
+                            <a href="{% url 'house-details' house.pk %}" class="btn btn-primary btn-sm mt-3">View Details</a>
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+
+            </div>
+
+            <div class="card-footer bg-white">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        {% if houses.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ houses.previous_page_number }}">Previous</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        </li>
+                        {% endif %}
+
+                        {% if houses.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ houses.next_page_number }}">Next</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
