@@ -67,7 +67,7 @@ For production deployment, you will need to configure your application with a pr
 
 ## License
 
-This project is licensed under the [MIT LICENSE](LICENSE), which permits reuse, modification, and distribution with proper attribution.
+This project is licensed under the [MIT LICENSE](LICENSE.md), which permits reuse, modification, and distribution with proper attribution.
 
 ## Acknowledgments
 
