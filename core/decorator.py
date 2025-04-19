@@ -2,6 +2,7 @@ from functools import wraps
 from django.shortcuts import redirect
 from django.contrib import messages
 
+# Check if session user is tenant, if not redirect to dashboard with error message
 def tenant_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
@@ -13,6 +14,7 @@ def tenant_required(view_func):
             return redirect('dashboard') 
     return _wrapped_view
 
+# Check if session user is landlord, if not redirect to dashboard with error message
 def landlord_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):

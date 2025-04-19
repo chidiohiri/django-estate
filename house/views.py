@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib.auth import get_user_model
 from .models import House, HouseInspection, SaveHouse
+from django.core.mail import send_mail
 from . import form as fm 
 from .filters import HouseFilters, SavedHouseFilter, HouseInspectionFilter
 from core.decorator import tenant_required, landlord_required
@@ -200,6 +201,15 @@ def inspect_house(request, pk):
             var.house = house
             var.user = request.user
             var.save()
+
+            send_mail(
+                'HOUSE INSPECTION SCHEDULED', 
+                f'Hi {request.user.first_name}, We have submitted your application and notified the landlord. All the best!', 
+                'noreply@email.com', 
+                [request.user.email], 
+                fail_silently=False
+                )
+            
             messages.success(request, 'House inspection has been scheduled')
             return redirect('dashboard') 
         else:
@@ -230,17 +240,13 @@ def my_house_inspections(request):
 
 # View to delete a user's scheduled inspection
 @login_required
-@login_required
+@tenant_required
 def delete_house_inspection(request, pk):
     inspection = get_object_or_404(HouseInspection, pk=pk)
 
     if inspection.user != request.user:
         messages.warning(request, 'You do not have permissions to perform this action')
         return redirect('dashboard')
-    
-    if inspection.user != request.user:
-        messages.warning(request, 'You cannot delete this data')
-        return redirect('my-house-inspections')
     
     inspection.delete()
     messages.success(request, 'House inspection schedule is deleted')

@@ -16,7 +16,7 @@ def generate_activation_link(user, request):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     return request.build_absolute_uri(f'/accounts/activate-account/{uid}/{token}')
 
-# register landlord
+# Register Landlord and send account activation link 
 def register_landlord(request):
     if request.method == 'POST':
         form = fm.RegisterUserForm(request.POST)
@@ -27,7 +27,7 @@ def register_landlord(request):
             var.is_active = False
             var.save()
 
-            # send activation link 
+            # Send activation link 
             activation_link = generate_activation_link(var, request)
             send_mail(
                 'ACTION REQUIRED: Activate your account', 
@@ -48,7 +48,7 @@ def register_landlord(request):
     
     return render(request, 'accounts/register_landlord.html', context)
 
-# register tenant
+# Register Tenant and send account activation link
 def register_tenant(request):
     if request.method == 'POST':
         form = fm.RegisterUserForm(request.POST)
@@ -80,7 +80,7 @@ def register_tenant(request):
     
     return render(request, 'accounts/register_tenant.html', context)
 
-# activate account 
+# Activate account 
 def activate_account(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -97,7 +97,7 @@ def activate_account(request, uidb64, token):
         messages.warning(request, 'Invalid activation link')
         return redirect('register-customer')
 
-# login user 
+# Login user and redirect to 'Next' page, if any
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -119,13 +119,13 @@ def login_user(request):
     return render(request, 'accounts/login.html')
 
 
-# logout user 
+# Logout user 
 def logout_user(request):
     logout(request)
     messages.success(request, 'Session ended. Log in to continue')
     return redirect('login')
 
-# change password 
+# Change password, in-app
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -144,7 +144,7 @@ def change_password(request):
     
     return render(request, 'accounts/change_password.html', context)
 
-# update profile
+# Update profile
 @login_required
 def update_profile(request):
     if request.method == 'POST':
@@ -162,4 +162,4 @@ def update_profile(request):
     
     return render(request, 'accounts/update_profile.html', context)
 
-# reset password 
+# Reset password - using in-built django urls in urls.py
